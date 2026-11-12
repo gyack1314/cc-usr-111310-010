@@ -1,0 +1,107 @@
+{
+  "kind": "physical-design",
+  "candidates": [
+    {
+      "id": "dict",
+      "bytes": 2,
+      "maintenance": "1",
+      "requires": [],
+      "exclusive_group": null
+    },
+    {
+      "id": "sortA",
+      "bytes": 4,
+      "maintenance": "1",
+      "requires": [
+        "dict"
+      ],
+      "exclusive_group": "A-layout"
+    },
+    {
+      "id": "sortB",
+      "bytes": 5,
+      "maintenance": "1",
+      "requires": [],
+      "exclusive_group": "A-layout"
+    },
+    {
+      "id": "must",
+      "bytes": 1,
+      "maintenance": "0",
+      "requires": [],
+      "exclusive_group": null
+    }
+  ],
+  "queries": [
+    {
+      "id": "q1",
+      "weight": "2",
+      "plans": [
+        {
+          "id": "base",
+          "requires": [],
+          "cost": "20"
+        },
+        {
+          "id": "a",
+          "requires": [
+            "dict",
+            "sortA"
+          ],
+          "cost": "2"
+        },
+        {
+          "id": "b",
+          "requires": [
+            "sortB"
+          ],
+          "cost": "8"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "weight": "1",
+      "plans": [
+        {
+          "id": "base",
+          "requires": [],
+          "cost": "10"
+        },
+        {
+          "id": "shared",
+          "requires": [
+            "dict"
+          ],
+          "cost": "3"
+        }
+      ]
+    }
+  ],
+  "storage_budget": 7,
+  "maintenance_budget": "3",
+  "maintenance_coefficient": "1/2",
+  "mandatory": [
+    "must"
+  ],
+  "warehouse_version": "pw1",
+  "workload_version": "wl1",
+  "builders": {
+    "dict": {
+      "actual_bytes": 2,
+      "digest": "dict-v1"
+    },
+    "sortA": {
+      "actual_bytes": 4,
+      "digest": "sortA-v1"
+    },
+    "sortB": {
+      "actual_bytes": 5,
+      "digest": "sortB-v1"
+    },
+    "must": {
+      "actual_bytes": 1,
+      "digest": "must-v1"
+    }
+  }
+}
